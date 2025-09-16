@@ -1,0 +1,63 @@
+
+<style>
+ .btn-search {
+    background-color: red;
+    color: white;
+    height: 2.2rem;        
+    min-width: 5rem;
+    font-size: 1rem;       
+    border-radius: 0.7rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-search i {
+    margin-right: 0.2rem;
+    font-size: 0.9rem;       
+    height: 2rem;
+    padding-top: 0.5rem;
+}
+.btn-search:hover {
+    background-color: red;
+    color: white;
+}
+.search-form {
+    display: flex;
+    align-items: center;
+    height: 2.2rem;        
+}
+.search-inp{
+  border-radius: 0.7rem;
+  width: 20rem;
+}
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-brands fa-algolia"></i><b>WanderLust</b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav" style="margin-left: 20rem;">
+        <form class="search-form" role="search"  >
+          <input class="form-control me-2 search-inp" type="search" placeholder="Search destination" aria-label="Search">
+          <button class="btn btn-search " type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search </button>
+        </form>
+      </div>
+      <div class="navbar-nav" style="margin-left: 11rem;">
+        <a class="nav-link nav-btn new-btn" style="padding: 0.2rem 0.5rem 0.2rem 0.5rem;" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link nav-btn new-btn" href="/listings/new"><small>Host Your home</small></a>
+        <% if(!currUser){ %>
+        <a class="nav-link nav-btn user-btn" href="/signup">signup&nbsp;&nbsp;&nbsp;|</a>
+        <a class="nav-link nav-btn user-btn" href="/login">login</a>
+        <% } else { %>
+        <a class="nav-link nav-btn user-btn" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

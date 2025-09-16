@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="row"> 
+    <div class="col-6 offset-3" >
+        <br>
+        <h3>Edit Listing</h3>
+        <form method="post" action="/listings/<%=listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+        <br>
+        <div class=" mb-2">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" name="Listing[title]" class="form-control" value="<%=listing.title %>" autofocus required>
+            <div class="invalid-feedback">Please enter a valid title!</div>
+        </div>
+        
+        <div class=" mb-2">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" name="Listing[description]" class="form-control" required><%=listing.description %></textarea>
+            <div class="invalid-feedback">Please enter a valid description!</div>  
+        </div>
+
+        <div class=" mb-2">
+            <label for="image" class="form-label">Image URL</label>
+            <input type="text" id="image" name="Listing[image][url]" class="form-control" required value="<%=listing.image.url %>">
+            <div class="invalid-feedback">Please enter a valid url!</div>
+        </div>
+        <p>Or</p>
+        <div>
+            <label >Previous Image</label><br>
+            <% if ( listing.imageUpload && listing.imageUpload.imageurl && listing.imageUpload.imageurl
+                        !=="https://bunny-wp-pullzone-dt0gklpcc4.b-cdn.net/wp-content/uploads/2025/07/Evergreen-Escape-Villa-5bhk-scaled.webp"
+                        ) { %>
+            <img src="<%=orignalImageUrl %>" alt="Current Image" class="card-img-top" style="max-width: 280px;">
+            <% } else { %>
+            <img src="<%=listing.image.url %>" alt="Current Image" class="card-img-top" style="max-width: 280px;">
+            <% } %>
+        </div>
+        <div class=" mb-2">
+            <label for="image" class="form-label mt-1">Upload New Image</label>
+            <input type="file" id="image" name="Listing[imageUpload]" class="form-control">   
+        </div>
+
+        <div class=" mb-2">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" name="Listing[price]" class="form-control" value="<%=listing.price %>" required>
+            <div class="invalid-feedback">Please enter a valid price!</div>
+            
+        </div>
+
+        <div class="row">
+        <div class=" mb-2 col-md-6">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" id="location" name="Listing[location]" class="form-control" value="<%=listing.location%>"  required>
+            <div class="invalid-feedback">Please enter a valid location!</div>
+        </div>
+
+        <div class=" mb-2 col-md-6">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" id="country" name="Listing[country]" class="form-control" value="<%=listing.country%>" required>
+            <div class="invalid-feedback">Please enter a valid country!</div>
+            <br>
+        </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-dark mb-4 edit-btn">Edit</button>
+    </form>
+    </div>
+</div>

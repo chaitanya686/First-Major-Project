@@ -1,0 +1,25 @@
+
+<%if(success && success.length){ %>
+    <div class="alert alert-success mt-3 alert-dismissible fade show col-6 offset-3" role="alert">
+        <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+<% } %>
+
+<% if(error && error.length){ %>
+        <div class="alert alert-danger mt-3 alert-dismissible fade show col-6 offset-3" role="alert">
+            <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+<% } %>
+
+<script>
+  setTimeout(function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      // Bootstrap 5: Use the built-in dismiss method
+      const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+      bsAlert.close();
+    });
+  }, 2000);
+</script>

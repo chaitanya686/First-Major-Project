@@ -1,0 +1,168 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+
+footer {
+    width: 100%;
+    background: #f8f9fa;
+    text-align: center;
+    box-sizing: border-box;
+    /* Remove position: fixed, left, bottom, z-index, margin-left */
+}
+.f-info {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-algolia{
+    color: #fe424d;
+    font-size: 1.8rem;
+    margin-right: 5px;
+}
+
+.nav-btn{
+    color: #000 !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: #222;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+    animation-delay: 0.25s;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.f-info-socials i{
+    height: 1.5rem;
+    margin-right: 1.2rem;
+}
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 1rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0.1rem !important;
+}
+.card-img-top:hover{
+    box-shadow: 0 0 10px black !important;
+    transition:  0.2s ease-in-out !important;
+}
+.card-text{
+    font-weight: 600 !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: medium;
+}
+
+.showCard:hover{
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+.new-btn{
+    border: 1px solid black !important; 
+    border-radius: 20px !important; 
+    margin-right: 15px !important; 
+    size: 30px !important;
+}
+
+.new-btn:hover{
+    color: white !important;
+    background-color: #000 !important;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out !important;   
+}
+
+.user-btn:hover{
+    color: rgb(130, 10, 243) !important;
+    font-size: 17.5px !important;
+}
+
+
+.create-btn{
+    background-color: red !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
+.create-btn:hover{
+    box-shadow: 0 0 5px black !important;
+    transition:  0.2s ease-in-out !important;
+}
+div label{
+    font-weight: 500 !important;
+}
+
+/* .show-img{
+    width: 100vh !important;
+} */
+
+.edit-btn, .review-btn{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    background-color: black !important;
+    color: white !important;
+    font-weight: 400;
+    border: none !important;
+    border-radius: 8px !important;
+}
+.edit-btn:hover{
+    box-shadow: 0 0 5px black !important;
+    transition:  0.2s ease-in-out !important;
+}
+
+.review-btn:hover{
+    box-shadow: 0 0 5px black !important;
+    transition:  0.2s ease-in-out !important;
+}
+
+
+
+.delete-btn{
+    background-color: red !important;
+    border: none !important;
+    border-radius: 8px !important;
+    margin-right: 2rem !important;
+}
+.delete-btn:hover{
+    box-shadow: 0 0 5px black !important;
+    transition:  0.2s ease-in-out !important;
+}
+.btns{
+    display: flex;
+}
