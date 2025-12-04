@@ -1,15 +1,15 @@
-if(process.env.NODE_ENV!='production'){
-require('dotenv').config();
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config();
 }
 
 
-const express= require('express');
+const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const ExpressError=require("./utils/ExpressError.js");
+const ExpressError = require("./utils/ExpressError.js");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
@@ -30,36 +30,48 @@ app.engine('ejs', ejsMate); // Use ejsMate for layout support
 app.use(express.static(path.join(__dirname, '/public'))); // Serve static files from the public directory
 
 
-const dbUrl=process.env.ATLAS_DB_URL;
+const dbUrl = process.env.ATLAS_DB_URL;
+
+let store;
+try {
+    store = MongoStore.create({
+        mongoUrl: dbUrl,
+        crypto: {
+            secret: process.env.SECRET
+        },
+        touchAfter: 24 * 3600
+    });
+} catch (err) {
+    console.log('Using memory store for sessions due to DB connection issue');
+    store = null;
+}
+
 main().then(() => {
     console.log('Connected to MongoDB');
 }).catch(err => {
     console.error('Error connecting to MongoDB:', err);
+    console.log('App will continue without database connection');
 });
+
 async function main() {
     await mongoose.connect(dbUrl);
 }
 
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    crypto: {
-        secret:process.env.SECRET
-    },
-    touchAfter: 24 * 3600 // time period in seconds
-});
-store.on("error", function(e){
-    console.log("SESSION STORE ERROR", e);
-});
+if (store) {
+    store.on("error", function (e) {
+        console.log("SESSION STORE ERROR", e);
+    });
+}
 
-sessionOptions={
-    store:store,
-    secret:process.env.SECRET,
-    resave:false,
-    saveUninitialized:true,
-    cookie:{
-        httpOnly:true,
-        expires:Date.now()+1000*60*60*24*7,
-        maxAge:1000*60*60*24*7
+const sessionOptions = {
+    store: store,
+    secret: process.env.SECRET || 'fallback-secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
     },
 };
 
@@ -80,9 +92,9 @@ passport.deserializeUser(User.deserializeUser()); //deserializeUser method-> ses
 
 
 app.use((req, res, next) => {
-    res.locals.success=req.flash('success');
+    res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
-    res.locals.currUser=req.user;
+    res.locals.currUser = req.user || null;
     next(); //next ko call karna jaruri hai warna ye atak jayega yaha par
 });
 
@@ -97,11 +109,11 @@ app.use((req, res, next) => { //---tigdam lagal ke chala liya ...hahahaha
     next(new ExpressError(404, "Page not Found!!"));
 });
 
-app.use((err,req,res,next) => {
-    let{statusCode=500,message="Something went wrong!"}=err;
-   // res.status(statusCode).send(message);
-   res.status(statusCode).render('error.ejs', {message});
-    
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something went wrong!" } = err;
+    // res.status(statusCode).send(message);
+    res.status(statusCode).render('error.ejs', { message });
+
 });
 
 app.listen(8080, () => {
